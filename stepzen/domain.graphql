@@ -1,0 +1,61 @@
+type DomainData {
+  accept_all: Boolean
+  country: String
+  disposable: Boolean
+  domain: String
+  emails: [DomainEmailsEntry]
+  linked_domains: [JSON]
+  organization: String
+  pattern: String
+  state: String
+  webmail: Boolean
+}
+type DomainEmailsEntry {
+  confidence: Int
+  department: JSON
+  first_name: String
+  last_name: String
+  linkedin: JSON
+  phone_number: JSON
+  position: String
+  seniority: JSON
+  sources: [DomainSourcesEntry]
+  twitter: String
+  type: String
+  value: String
+  verification: DomainVerification
+}
+type DomainMeta {
+  limit: Int
+  offset: Int
+  params: DomainParams
+  results: Int
+}
+type DomainParams {
+  company: JSON
+  department: JSON
+  domain: String
+  seniority: JSON
+  type: JSON
+}
+type DomainRoot {
+  data: DomainData
+  meta: DomainMeta
+}
+type DomainSourcesEntry {
+  domain: String
+  extracted_on: Date
+  last_seen_on: Date
+  still_on_page: Boolean
+  uri: String
+}
+type DomainVerification {
+  date: Date
+  status: String
+}
+
+type Query {
+  searchDomain(api_key: String, domain: String): DomainRoot
+    @rest(endpoint: "https://api.hunter.io/v2/domain-search")
+}
+

@@ -1,0 +1,9 @@
+schema @sdl(files: [
+              "author.graphql",
+              "domain.graphql",
+              "email.graphql",
+              "verifier.graphql",
+              "count.graphql",
+            ]) {
+  query: Query
+}

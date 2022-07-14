@@ -1,0 +1,43 @@
+type Data {
+  accept_all: Boolean
+  company: String
+  domain: String
+  email: String
+  first_name: String
+  last_name: String
+  linkedin_url: String
+  phone_number: JSON
+  position: String
+  score: Int
+  sources: [SourcesEntry]
+  twitter: String
+  verification: Verification
+}
+type Meta {
+  params: Params
+}
+type Params {
+  max_duration: JSON
+  url: String
+}
+type Root {
+  data: Data
+  meta: Meta
+}
+type SourcesEntry {
+  domain: String
+  extracted_on: Date
+  last_seen_on: Date
+  still_on_page: Boolean
+  uri: String
+}
+type Verification {
+  date: Date
+  status: String
+}
+
+type Query {
+  getAuther(api_key: String, url: String): Root
+    @rest(endpoint: "https://api.hunter.io/v2/author-finder")
+}
+

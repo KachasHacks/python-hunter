@@ -1,0 +1,42 @@
+type CountData {
+  department: CountDepartment
+  generic_emails: Int
+  personal_emails: Int
+  seniority: CountSeniority
+  total: Int
+}
+type CountDepartment {
+  communication: Int
+  executive: Int
+  finance: Int
+  hr: Int
+  it: Int
+  legal: Int
+  management: Int
+  marketing: Int
+  sales: Int
+  support: Int
+}
+type CountMeta {
+  params: CountParams
+}
+type CountParams {
+  company: JSON
+  domain: String
+  type: JSON
+}
+type CountRoot {
+  data: CountData
+  meta: CountMeta
+}
+type CountSeniority {
+  executive: Int
+  junior: Int
+  senior: Int
+}
+
+type Query {
+  emailCount(domain: String): CountRoot
+    @rest(endpoint: "https://api.hunter.io/v2/email-count")
+}
+

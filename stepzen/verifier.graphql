@@ -1,0 +1,40 @@
+type VerifyData {
+  _deprecation_notice: String
+  accept_all: Boolean
+  block: Boolean
+  disposable: Boolean
+  email: String
+  gibberish: Boolean
+  mx_records: Boolean
+  regexp: Boolean
+  result: String
+  score: Int
+  smtp_check: Boolean
+  smtp_server: Boolean
+  sources: [VerifySourcesEntry]
+  status: String
+  webmail: Boolean
+}
+type VerifyMeta {
+  params: VerifyParams
+}
+type VerifyParams {
+  email: String
+}
+type VerifyRoot {
+  data: VerifyData
+  meta: VerifyMeta
+}
+type VerifySourcesEntry {
+  domain: String
+  extracted_on: Date
+  last_seen_on: Date
+  still_on_page: Boolean
+  uri: String
+}
+
+type Query {
+  verifyEmail(api_key: String, email: String): VerifyRoot
+    @rest(endpoint: "https://api.hunter.io/v2/email-verifier")
+}
+

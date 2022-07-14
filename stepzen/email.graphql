@@ -1,0 +1,44 @@
+type EmailData {
+  accept_all: Boolean
+  company: String
+  domain: String
+  email: String
+  first_name: String
+  last_name: String
+  linkedin_url: JSON
+  phone_number: JSON
+  position: JSON
+  score: Int
+  sources: [JSON]
+  twitter: JSON
+  verification: EmailVerification
+}
+type EmailMeta {
+  params: EmailParams
+}
+type EmailParams {
+  company: JSON
+  domain: String
+  first_name: String
+  full_name: JSON
+  last_name: String
+  max_duration: JSON
+}
+type EmailRoot {
+  data: EmailData
+  meta: EmailMeta
+}
+type EmailVerification {
+  date: Date
+  status: String
+}
+
+type Query {
+  findEmail(
+    api_key: String
+    domain: String
+    first_name: String
+    last_name: String
+  ): EmailRoot @rest(endpoint: "https://api.hunter.io/v2/email-finder")
+}
+
